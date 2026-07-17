@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Remote session</title><link rel="stylesheet" href="/static/style.css"></head>
+<body class="remote-body" data-device-id="{{ device_id }}">
+  <header class="remote-bar"><strong>Remote support</strong><span id="remoteStatus">Requesting access…</span>
+    <div class="remote-actions"><select id="remoteQuality"><option value="40">Data saver</option><option value="70" selected>Balanced</option><option value="90">High quality</option></select><button id="clipboard">Clipboard</button><button id="fullscreen">Full screen</button><button id="disconnect" class="danger">Disconnect</button></div>
+  </header>
+  <main class="screen-wrap"><div id="approval" class="approval"><div class="spinner"></div><h2>Waiting for approval</h2><p>The other user must approve screen access on their PC.</p><label>Unattended PIN (if enabled)<input id="remotePin" type="password"><button id="retryPin" class="primary small">Try PIN</button></label></div><img id="screen" draggable="false" alt="Remote screen"></main>
+  <script src="/static/remote.js"></script>
+</body></html>

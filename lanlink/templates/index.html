@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LANLink</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">L</span><div><strong>LANLink</strong><small id="identity">Starting…</small></div></div>
+    <div class="status"><span class="dot"></span>Running on this PC</div>
+  </header>
+  <main>
+    <section class="hero">
+      <div><p class="eyebrow">YOUR OFFICE NETWORK</p><h1>Share files. Help teammates.<br>Stay in control.</h1>
+      <p>Private LAN sharing and approval-based remote support—without configuring Windows SMB.</p></div>
+      <button class="primary" id="addShare">＋ Share a folder</button>
+    </section>
+
+    <div id="notice" class="notice hidden"></div>
+
+    <section id="requestsSection" class="panel hidden">
+      <div class="section-title"><div><h2>Needs your approval</h2><p>Requests waiting on this computer</p></div></div>
+      <div id="requests" class="request-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>Computers</h2><p>Automatically discovered on your local network</p></div><button class="ghost" id="refresh">↻ Refresh</button></div>
+      <div id="peers" class="cards"><div class="empty">Looking for other computers…</div></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title"><div><h2>Shared from this PC</h2><p>Only paired computers can see these locations</p></div></div>
+      <div id="shares" class="share-list"></div>
+    </section>
+
+    <section class="panel settings">
+      <div class="section-title"><div><h2>Security & remote access</h2><p>Safe defaults; unattended access is off</p></div></div>
+      <div class="settings-grid">
+        <label>Computer name<input id="deviceName" maxlength="64"></label>
+        <label>Pairing method<select id="pairMode"><option value="approval">Approve on this PC</option><option value="pin">Pairing PIN</option></select></label>
+        <label>Pairing PIN<input id="pairPin" type="password" inputmode="numeric" placeholder="4–10 digits"></label>
+        <label>Screen quality<input id="quality" type="range" min="25" max="90"><span id="qualityValue"></span></label>
+      </div>
+      <div class="unattended"><div><strong>Unattended remote access</strong><p>Allows permanent access only with a separate 6–12 digit PIN.</p></div><label class="switch"><input id="unattended" type="checkbox"><span></span></label></div>
+      <div id="unattendedPinRow" class="unattended-pin hidden"><label>Unattended PIN<input id="unattendedPin" type="password" inputmode="numeric" placeholder="6–12 digits"></label></div>
+      <button class="primary small" id="saveSettings">Save security settings</button>
+      <div id="trusted" class="trusted"></div>
+    </section>
+  </main>
+
+  <dialog id="shareDialog">
+    <form method="dialog" class="dialog-card" id="shareForm">
+      <div class="dialog-head"><h2>Share a folder or drive</h2><button value="cancel" class="icon">×</button></div>
+      <label>Location<div class="path-row"><input id="sharePath" placeholder="C:\Team Files" required><button type="button" class="ghost" id="chooseFolder">Browse…</button></div></label>
+      <label>Display name<input id="shareName" placeholder="Team Files"></label>
+      <label>Permission<select id="shareMode"><option value="read">Read only — browse and download</option><option value="full">Full access — upload, rename, copy and delete</option></select></label>
+      <div class="dialog-actions"><button value="cancel" class="ghost">Cancel</button><button type="submit" value="default" class="primary">Share</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="browserDialog"><div class="dialog-card browser-card">
+    <div class="dialog-head"><div><h2 id="browserTitle">Files</h2><p id="breadcrumb"></p></div><button class="icon" onclick="this.closest('dialog').close()">×</button></div>
+    <div id="shareChooser" class="share-chooser"></div>
+    <div id="browserTools" class="browser-tools hidden"><button class="ghost" id="goUp">← Up</button><label class="upload-button">Upload<input type="file" id="uploadFile"></label><button class="ghost" id="newFolder">New folder</button></div>
+    <div id="fileList" class="file-list"></div>
+  </div></dialog>
+  <script src="/static/app.js"></script>
+</body>
+</html>

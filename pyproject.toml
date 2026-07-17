@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lanlink-office"
+version = "0.1.0"
+description = "Windows LAN file sharing and approval-based remote support"
+requires-python = ">=3.11"
+dependencies = [
+  "Flask==3.1.2",
+  "Pillow==11.3.0",
+  "requests==2.32.4",
+  "waitress==3.0.2",
+  "cryptography==45.0.5",
+]
+
+[project.scripts]
+lanlink = "lanlink.app:main"
+
+[tool.setuptools]
+packages = ["lanlink"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+lanlink = ["templates/*.html", "static/*.css", "static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
